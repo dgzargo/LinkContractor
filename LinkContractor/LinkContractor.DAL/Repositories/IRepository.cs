@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace LinkContractor.DAL.Repositories
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<TEntity> where TEntity : class
     {
-        T Find(object key);
-        T FirstOrDefault(Expression<Func<T, bool>> predicate);
-        IEnumerable<T> GetAll();
-        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
-        void Add(T entity);
-        void AddRange(IEnumerable<T> entities);
-        void Remove(T entity);
-        void RemoveRange(IEnumerable<T> entities);
+        TEntity Find(object key);
+        TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
+
+        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null);
+
+        void Update(TEntity entity);
+        void Add(TEntity entity);
+        void Add(IEnumerable<TEntity> entities);
+        void Add(params TEntity[] entities);
+        void Remove(object key);
+        void Remove(TEntity entity);
+        void Remove(IEnumerable<TEntity> entities);
+        void Remove(params TEntity[] entities);
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using LinkContractor.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LinkContractor.DAL.Repositories
 {
@@ -12,11 +14,12 @@ namespace LinkContractor.DAL.Repositories
 
         private LinkContractorDbContext Context { get; }
 
-        public int? GetShortCode(SavedData entity)
+        public SavedData GetShortCode(Guid guidParam)
         {
-            var guid = entity.Guid;
-            var shortCode = Context.ShortCodes.SingleOrDefault(sc => sc.RelatedGuid == guid);
-            return shortCode?.Code;
+            var savedData = Context.SavedData
+                .Include(sd => sd.ShortCode)
+                .FirstOrDefault(sd => sd.Guid == guidParam);
+            return savedData;
         }
     }
 }
