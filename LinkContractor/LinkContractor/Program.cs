@@ -4,6 +4,7 @@ using System.Linq;
 using LinkContractor.DAL;
 using LinkContractor.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace LinkContractor
 {
@@ -11,34 +12,38 @@ namespace LinkContractor
     {
         private static void Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            
             var options = new DbContextOptionsBuilder<LinkContractorDbContext>()
                 .UseSqlServer(
-                    "put your connection string here"
+                    configuration.GetConnectionString("default")
                     ).Options;
             
             using var uow = new UnitOfWork(new LinkContractorDbContext(options));
 
             #region cleaning tables
 
-            uow.ShortCodes.RemoveRange(uow.ShortCodes.GetAll());
+            uow.ShortCodes.Remove(uow.ShortCodes.Get());
             uow.SaveChanges();
-            uow.SavedData.RemoveRange(uow.SavedData.GetAll());
+            uow.SavedData.Remove(uow.SavedData.Get());
             uow.SaveChanges();
 
             #endregion
 
             var range = CreateSavedDataRange(10).ToList().AsReadOnly();
-            uow.SavedData.AddRange(range);
+            uow.SavedData.Add(range);
             Console.WriteLine($"SaveChanges() code: {uow.SaveChanges()}");
-            uow.ShortCodes.AddRange(range.CreateShortCodesRange(0.2f));
+            uow.ShortCodes.Add(range.CreateShortCodesRange(0.2f));
             Console.WriteLine($"SaveChanges() code: {uow.SaveChanges()}");
 
             var zero = uow.ShortCodes.FirstOrDefault(e => true).Code; // omitting null check
             var first = uow.ShortCodes.GetCorrespondingSavedData(zero);
-            var second = uow.SavedData.GetShortCode(first);
+            var second = uow.SavedData.GetShortCode(first.Guid);
 
             Console.WriteLine($"zero code: {zero}");
-            Console.WriteLine($"first join: {first?.Message}");
+            Console.WriteLine($"first join: {first.Message}");
             Console.WriteLine($"second join: {second}");
         }
 
