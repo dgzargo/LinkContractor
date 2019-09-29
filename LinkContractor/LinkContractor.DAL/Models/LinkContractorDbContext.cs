@@ -4,7 +4,7 @@ namespace LinkContractor.DAL.Models
 {
     public class LinkContractorDbContext : DbContext
     {
-        public LinkContractorDbContext(DbContextOptions<LinkContractorDbContext> options)
+        public LinkContractorDbContext(DbContextOptions options)
             : base(options)
         {
         }
