@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LinkContractor.BLL\LinkContractor.BLL.csproj" />
     <ProjectReference Include="..\LinkContractor.DAL\LinkContractor.DAL.csproj" />
   </ItemGroup>
 

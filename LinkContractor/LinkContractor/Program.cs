@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LinkContractor.BLL;
 using LinkContractor.DAL;
 using LinkContractor.DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace LinkContractor
                 .Build();
 
             var serviceCollection = new ServiceCollection()
-                .ConfigureDalDependencies(
+                .ConfigureBllDependencies(
                     options => options.UseSqlServer(
                         configuration.GetConnectionString("default")
                     )
