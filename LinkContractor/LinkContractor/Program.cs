@@ -5,6 +5,7 @@ using LinkContractor.DAL;
 using LinkContractor.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LinkContractor
 {
@@ -15,13 +16,17 @@ namespace LinkContractor
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
-            
-            var options = new DbContextOptionsBuilder<LinkContractorDbContext>()
-                .UseSqlServer(
-                    configuration.GetConnectionString("default")
-                    ).Options;
-            
-            using var uow = new UnitOfWork(new LinkContractorDbContext(options));
+
+            var serviceCollection = new ServiceCollection()
+                .ConfigureDalDependencies(
+                    options => options.UseSqlServer(
+                        configuration.GetConnectionString("default")
+                    )
+                );
+
+            using var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            using var uow = serviceProvider.GetService<IUnitOfWork>();
 
             #region cleaning tables
 
