@@ -4,7 +4,7 @@ create table SavedData(
     Message     nvarchar(250)    not null,
     IsLink      bit              not null,
     [User]      uniqueidentifier     null,
-    Created     datetime         default(getdate()),
+    Created     datetime         not null default(getdate()),
     TimeLimit   int                  null,
     EndTime     as (Created+TimeLimit),
     ClickLimit  int                  null,
