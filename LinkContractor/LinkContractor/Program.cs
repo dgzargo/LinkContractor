@@ -24,17 +24,6 @@ namespace LinkContractor
                 );
 
             using var serviceProvider = serviceCollection.BuildServiceProvider();
-
-            var uow = serviceProvider.GetService<IUnitOfWork>();
-            uow.SavedData.Remove(uow.SavedData.Get());
-
-            var bl = serviceProvider.GetService<BlMain>();
-
-            var a = Guid.NewGuid();
-            var b = bl.AddRecord(CreateSavedDataDTO("test message", false, null, user: a), true);
-            var c = bl.ChangeRecord(b, CreateSavedDataDTO("another message", false, null, user: a));
-            var d = bl.Click(b).Message;
-            Console.WriteLine($"guid: {a}\ncode: {b}\nmessage changed: {c}\nmessage: {d}");
         }
     }
 }
