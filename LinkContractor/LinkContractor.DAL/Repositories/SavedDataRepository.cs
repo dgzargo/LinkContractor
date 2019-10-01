@@ -14,7 +14,7 @@ namespace LinkContractor.DAL.Repositories
 
         private LinkContractorDbContext Context { get; }
 
-        public SavedData GetShortCode(Guid guidParam)
+        public SavedData GetSavedDataWithShortCode(Guid guidParam)
         {
             var savedData = Context.SavedData
                 .Include(sd => sd.ShortCode)

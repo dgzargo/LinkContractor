@@ -5,6 +5,6 @@ namespace LinkContractor.DAL.Repositories
 {
     public interface ISavedDataRepository : IRepository<SavedData>
     {
-        SavedData GetShortCode(Guid guidParam);
+        SavedData GetSavedDataWithShortCode(Guid guidParam);
     }
 }

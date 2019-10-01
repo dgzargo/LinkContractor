@@ -15,6 +15,6 @@ namespace LinkContractor.DAL.Models
         public int? ClickLimit { get; set; }
         public Guid? Group { get; set; }
 
-        public ShortCode? ShortCode { get; set; }
+        public ShortCode ShortCode { get; set; }
     }
 }
