@@ -1,5 +1,7 @@
-﻿using LinkContractor.DAL.Models;
+﻿using LinkContractor.DAL.Entities;
+using LinkContractor.DAL.Interfaces;
 using LinkContractor.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace LinkContractor.DAL
 {
@@ -12,7 +14,7 @@ namespace LinkContractor.DAL
             ShortCodes = new ShortCodeRepository(context);
         }
 
-        private LinkContractorDbContext Context { get; }
+        private DbContext Context { get; }
 
         public ISavedDataRepository SavedData { get; }
         public IShortCodeRepository ShortCodes { get; }

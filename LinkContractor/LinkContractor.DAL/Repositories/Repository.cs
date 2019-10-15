@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using LinkContractor.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkContractor.DAL.Repositories
@@ -13,7 +14,7 @@ namespace LinkContractor.DAL.Repositories
             Entities = context.Set<TEntity>();
         }
 
-        private DbSet<TEntity> Entities { get; }
+        protected DbSet<TEntity> Entities { get; }
 
         public TEntity Find(object key)
         {

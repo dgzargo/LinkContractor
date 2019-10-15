@@ -2,11 +2,12 @@
 using LinkContractor.BLL.DTO;
 using LinkContractor.BLL.Message;
 using LinkContractor.DAL;
-using LinkContractor.DAL.Models;
+using LinkContractor.DAL.Entities;
+using LinkContractor.DAL.Interfaces;
 
 namespace LinkContractor.BLL
 {
-    public class BlMain
+    public class BlMain : IBlMain
     {
         public BlMain(IUnitOfWork unitOfWorkParam)
         {
@@ -103,5 +104,17 @@ namespace LinkContractor.BLL
         {
             UnitOfWork.SaveChanges();
         }
+
+        public void Dispose()
+        {
+            UnitOfWork.Dispose();
+        }
+    }
+
+    public interface IBlMain : IDisposable
+    {
+        string AddRecord(SavedDataDTO savedDataDTO, bool isShortLinkNeeded = false);
+        bool ChangeRecord(string code, SavedDataDTO savedDataDTO);
+        IMessage Click(string code);
     }
 }

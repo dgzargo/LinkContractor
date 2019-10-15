@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-using LinkContractor.DAL.Models;
+using LinkContractor.DAL.Entities;
+using LinkContractor.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkContractor.DAL.Repositories
@@ -9,14 +10,11 @@ namespace LinkContractor.DAL.Repositories
     {
         public SavedDataRepository(LinkContractorDbContext context) : base(context)
         {
-            Context = context;
         }
-
-        private LinkContractorDbContext Context { get; }
 
         public SavedData GetSavedDataWithShortCode(Guid guidParam)
         {
-            var savedData = Context.SavedData
+            var savedData = Entities
                 .Include(sd => sd.ShortCode)
                 .FirstOrDefault(sd => sd.Guid == guidParam);
             return savedData;

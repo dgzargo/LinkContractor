@@ -12,7 +12,7 @@ namespace LinkContractor.BLL
             Action<DbContextOptionsBuilder> optionsAction)
         {
             serviceCollection.ConfigureDalDependencies(optionsAction);
-            serviceCollection.AddTransient<BlMain>();
+            serviceCollection.AddTransient<IBlMain, BlMain>();
             return serviceCollection;
         }
 

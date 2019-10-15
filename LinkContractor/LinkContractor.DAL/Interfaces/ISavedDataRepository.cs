@@ -1,7 +1,7 @@
 ﻿using System;
-using LinkContractor.DAL.Models;
+using LinkContractor.DAL.Entities;
 
-namespace LinkContractor.DAL.Repositories
+namespace LinkContractor.DAL.Interfaces
 {
     public interface ISavedDataRepository : IRepository<SavedData>
     {

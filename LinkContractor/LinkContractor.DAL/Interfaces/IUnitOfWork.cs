@@ -1,7 +1,6 @@
 ﻿using System;
-using LinkContractor.DAL.Repositories;
 
-namespace LinkContractor.DAL
+namespace LinkContractor.DAL.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

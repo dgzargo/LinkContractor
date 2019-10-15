@@ -19,7 +19,9 @@ create table ShortCodes(
     RelatedGuid uniqueidentifier not null,
 
     constraint ShortCodes_ShortCode_pk primary key clustered (ShortCode),
-    constraint ShortCodes_RelatedGuid_fk foreign key (RelatedGuid) references SavedData(Guid) on delete cascade on update cascade,
+    constraint ShortCodes_RelatedGuid_fk foreign key (RelatedGuid) references SavedData(Guid)
+        on delete no action
+        on update cascade,
 )
 create unique nonclustered index ShortCodes_RelatedGuid_index on ShortCodes(RelatedGuid)
 

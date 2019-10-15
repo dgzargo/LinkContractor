@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LinkContractor.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace LinkContractor.DAL.Models
+namespace LinkContractor.DAL
 {
     public class LinkContractorDbContext : DbContext
     {

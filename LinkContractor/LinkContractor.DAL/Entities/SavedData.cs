@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LinkContractor.DAL.Models
+namespace LinkContractor.DAL.Entities
 {
     public class SavedData
     {

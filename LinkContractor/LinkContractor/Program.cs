@@ -1,10 +1,9 @@
-﻿using System;
-using LinkContractor.BLL;
-using LinkContractor.DAL;
+﻿using LinkContractor.BLL;
+using LinkContractor.CUI;
+using LinkContractor.CUI.MyConsole;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using static LinkContractor.BLL.Extension;
 
 namespace LinkContractor
 {
@@ -21,9 +20,12 @@ namespace LinkContractor
                     options => options.UseSqlServer(
                         configuration.GetConnectionString("default")
                     )
-                );
+                )
+                .AddSingleton<IConsole>(new ConsoleProxy())
+                .AddTransient<CollectionOfCommand>();
 
             using var serviceProvider = serviceCollection.BuildServiceProvider();
+            serviceProvider.GetRequiredService<CollectionOfCommand>().DoWork();
         }
     }
 }

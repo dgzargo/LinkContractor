@@ -1,5 +1,6 @@
 ﻿using System;
-using LinkContractor.DAL.Models;
+using LinkContractor.DAL.Entities;
+using LinkContractor.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,12 +1,12 @@
 ﻿using System;
 using LinkContractor.BLL.Message;
-using LinkContractor.DAL.Models;
+using LinkContractor.DAL.Entities;
 
 namespace LinkContractor.BLL.DTO
 {
     internal static class SavedDataDTOHelper
     {
-        public static SavedDataDTO ToDTO(this SavedData savedData)
+        /*public static SavedDataDTO ToDTO(this SavedData savedData)
         {
             var savedDataDTO = new SavedDataDTO
             {
@@ -22,7 +22,7 @@ namespace LinkContractor.BLL.DTO
                 Code = savedData.ShortCode?.Code
             };
             return savedDataDTO;
-        }
+        }*/
 
         public static SavedData ToSavedData(this SavedDataDTO savedDataDTO)
         {

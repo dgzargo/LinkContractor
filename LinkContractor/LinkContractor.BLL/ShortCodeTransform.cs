@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LinkContractor.BLL
 {
-    public static class ShortCodeTransform
+    internal static class ShortCodeTransform
     {
         private static readonly IReadOnlyList<char> Chars;
 
